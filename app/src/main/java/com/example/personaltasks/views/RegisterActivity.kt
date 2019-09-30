@@ -1,9 +1,10 @@
-package com.example.personaltasks
+package com.example.personaltasks.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.example.personaltasks.R
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
@@ -32,6 +33,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun salvarUsuario(){
-        
+
     }
 }

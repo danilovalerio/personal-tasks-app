@@ -1,4 +1,4 @@
-package com.example.personaltasks
+package com.example.personaltasks.constants
 
 /**
  * Mapear as tabelas em constantes para evitar erros com identificação das mesmas
