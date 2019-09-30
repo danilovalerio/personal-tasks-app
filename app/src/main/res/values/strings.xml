@@ -20,4 +20,5 @@
     <string name="hint_email">E-mail</string>
     <string name="hint_senha">Senha</string>
     <string name="btn_cadastrar">Cadastrar</string>
+    <string name="erro_generico">Algo de errado aconteceu, tente novamente!</string>
 </resources>

@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.personaltasks.R
 import com.example.personaltasks.business.UsuarioBusiness
+import com.example.personaltasks.util.ValidationException
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
@@ -27,7 +28,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
         when(view.id){
             R.id.btnSalvar -> {
-                Toast.makeText(this, "BTN SALVAR", Toast.LENGTH_SHORT).show()
                 salvarUsuario()
             }
         }
@@ -41,12 +41,22 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun salvarUsuario(){
 
-        val nome = et_nome.text.toString()
-        val email = et_email.text.toString()
-        val senha = et_senha.text.toString()
+        try {
 
-        //Faz a inserção do usuário (ainda sem validações)
-        mUsuarioBusiness.insert(nome, email, senha)
+            val nome = et_nome.text.toString()
+            val email = et_email.text.toString()
+            val senha = et_senha.text.toString()
+
+            //Faz a inserção do usuário (ainda sem validações)
+            mUsuarioBusiness.insert(nome, email, senha)
+
+        } catch (e: ValidationException){
+
+            Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
+
+        } catch (e: Exception){
+            Toast.makeText(this, getString(R.string.erro_generico), Toast.LENGTH_SHORT).show()
+        }
 
     }
 }
