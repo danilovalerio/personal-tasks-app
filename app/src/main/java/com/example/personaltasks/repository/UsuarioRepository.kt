@@ -2,6 +2,7 @@ package com.example.personaltasks.repository
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import com.example.personaltasks.constants.DataBaseConstants
 
 /**
@@ -28,19 +29,38 @@ class UsuarioRepository private constructor(context: Context){
     }
 
     fun emailExistente(email: String) : Boolean{
-        val db = mPersonalTasksDataBaseHelper.readableDatabase
+        val retorno: Boolean //inicializa como false
+        try {
 
-        //Itens esperados no retorno
-        val projecao = arrayOf(DataBaseConstants.USUARIO.COLUMNS.ID)
+            val cursor: Cursor
+            val db = mPersonalTasksDataBaseHelper.readableDatabase
 
-        //Qual o filtro que temos que aplicar
-        val selecao = "${DataBaseConstants.USUARIO.COLUMNS.EMAIL} = ?"
-        val selecaoArgumentos = arrayOf(email)
+            //Itens esperados no retorno
+            val projecao = arrayOf(DataBaseConstants.USUARIO.COLUMNS.ID)
 
-        //query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy)
-        db.query(DataBaseConstants.USUARIO.TABLE_NAME, projecao, selecao,  selecaoArgumentos, null, null, null)
+            //Qual o filtro que temos que aplicar
+            val selecao = "${DataBaseConstants.USUARIO.COLUMNS.EMAIL} = ?"
+            val selecaoArgumentos = arrayOf(email)
 
-        //db.rawQuery("select * from user where email = danilo", null)
+            //query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy)
+            cursor = db.query(
+                DataBaseConstants.USUARIO.TABLE_NAME,
+                projecao,
+                selecao,
+                selecaoArgumentos,
+                null,
+                null,
+                null
+            )
+            //db.rawQuery("select * from user where email = danilo", null)
+            retorno = cursor.count > 0
+            cursor.close()
+        } catch (e: Exception){
+            throw e
+        }
+        return retorno
+
+
     }
 
     //faz a inserção e retorna o último ID inserido
