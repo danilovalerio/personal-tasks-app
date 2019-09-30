@@ -1,6 +1,7 @@
 package com.example.personaltasks.business
 
 import android.content.Context
+import com.example.personaltasks.R
 import com.example.personaltasks.repository.UsuarioRepository
 import com.example.personaltasks.util.ValidationException
 import java.lang.Exception
@@ -18,6 +19,10 @@ class UsuarioBusiness (val context: Context) {
        try {
            if(nome.isNullOrEmpty() || email.isNullOrEmpty() || senha.isNullOrEmpty() ){
                throw ValidationException("Informe os campos!")
+           }
+
+           if(mUsuarioRepository.emailExistente(email)){
+               throw ValidationException(context.getString(R.string.erro_email_existente))
            }
 
            val userId = mUsuarioRepository.insert(nome, email, senha)

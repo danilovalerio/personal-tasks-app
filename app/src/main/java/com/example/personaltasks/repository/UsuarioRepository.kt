@@ -27,6 +27,20 @@ class UsuarioRepository private constructor(context: Context){
         private var INSTANCE: UsuarioRepository? = null
     }
 
+    fun emailExistente(email: String) : Boolean{
+        val db = mPersonalTasksDataBaseHelper.readableDatabase
+
+        //Itens esperados no retorno
+        val projecao = arrayOf(DataBaseConstants.USUARIO.COLUMNS.ID)
+
+        //Qual o filtro que temos que aplicar
+        val selecao = "${DataBaseConstants.USUARIO.COLUMNS.EMAIL} = ?"
+        val selecaoArgumentos = arrayOf(email)
+
+        //query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy)
+        db.query(DataBaseConstants.USUARIO.TABLE_NAME, projecao, selecao,  selecaoArgumentos, null, null, null)
+    }
+
     //faz a inserção e retorna o último ID inserido
     fun insert(nome: String, email: String, senha: String): Int{
         //ações no banco readableDatabase: SELECT, writableDatabase: INSERT, DELETE, UPDATE
