@@ -13,5 +13,6 @@ class UsuarioBusiness (val context: Context) {
 
     fun insert(nome: String, email: String, senha: String){
         val userId = mUsuarioRepository.insert(nome, email, senha)
+        val  str = ""
     }
 }
