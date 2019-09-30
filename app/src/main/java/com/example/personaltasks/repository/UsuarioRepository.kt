@@ -39,6 +39,8 @@ class UsuarioRepository private constructor(context: Context){
 
         //query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy)
         db.query(DataBaseConstants.USUARIO.TABLE_NAME, projecao, selecao,  selecaoArgumentos, null, null, null)
+
+        //db.rawQuery("select * from user where email = danilo", null)
     }
 
     //faz a inserção e retorna o último ID inserido
