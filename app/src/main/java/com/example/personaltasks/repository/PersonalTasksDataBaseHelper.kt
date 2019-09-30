@@ -8,5 +8,5 @@ class PersonalTasksDataBaseHelper {
         ${DataBaseConstants.USUARIO.COLUMNS.NOME} TEXT,
         ${DataBaseConstants.USUARIO.COLUMNS.EMAIL} TEXT,
         ${DataBaseConstants.USUARIO.COLUMNS.SENHA} TEXT       
-    )""".trimIndent()
+    );"""
 }
