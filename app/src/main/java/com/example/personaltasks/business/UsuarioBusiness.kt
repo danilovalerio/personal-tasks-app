@@ -18,12 +18,15 @@ class UsuarioBusiness (val context: Context) {
     private val mUsuarioRepository : UsuarioRepository = UsuarioRepository.getInstance(context)
     private val mSecurityPreferences: SecurityPreferences = SecurityPreferences(context)
 
-    fun login(email: String, senha: String){
+    fun login(email: String, senha: String) : Boolean{
         val user: UsuarioEntity? = mUsuarioRepository.get(email, senha)
-        if(user != null){
+        return if(user != null){
             mSecurityPreferences.storeSrings(PersonalTasksConstants.KEY.USER_ID, user.id.toString())
             mSecurityPreferences.storeSrings(PersonalTasksConstants.KEY.USER_NOME, user.nome)
             mSecurityPreferences.storeSrings(PersonalTasksConstants.KEY.USER_EMAIL, user.email)
+            true
+        } else {
+            false
         }
     }
 
