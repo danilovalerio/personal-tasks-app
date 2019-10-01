@@ -28,6 +28,33 @@ class UsuarioRepository private constructor(context: Context){
         private var INSTANCE: UsuarioRepository? = null
     }
 
+    fun get(email: String, senha: String){
+        try {
+
+            val cursor: Cursor
+            val db = mPersonalTasksDataBaseHelper.readableDatabase
+
+            //Itens esperados no retorno
+            val projecao = arrayOf(DataBaseConstants.USUARIO.COLUMNS.ID,
+                                                DataBaseConstants.USUARIO.COLUMNS.NOME,
+                                                DataBaseConstants.USUARIO.COLUMNS.EMAIL,
+                                                DataBaseConstants.USUARIO.COLUMNS.SENHA)
+
+            //Qual o filtro que temos que aplicar
+            val selecao = "${DataBaseConstants.USUARIO.COLUMNS.EMAIL} = ? AND ${DataBaseConstants.USUARIO.COLUMNS.EMAIL} = ? "
+            val selecaoArgumentos = arrayOf(email, senha)
+
+            //query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy)
+            cursor = db.query(DataBaseConstants.USUARIO.TABLE_NAME,projecao,selecao,selecaoArgumentos,null,null,null)
+            cursor.close()
+
+        } catch (e: Exception){
+            throw e
+
+        }
+
+    }
+
     fun emailExistente(email: String) : Boolean{
         val retorno: Boolean //inicializa como false
         try {
