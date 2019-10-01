@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import com.example.personaltasks.constants.DataBaseConstants
+import com.example.personaltasks.entities.UsuarioEntity
 
 /**
  * Responsável pela inserção da classe usuário
@@ -28,9 +29,9 @@ class UsuarioRepository private constructor(context: Context){
         private var INSTANCE: UsuarioRepository? = null
     }
 
-    fun get(email: String, senha: String){
+    fun get(email: String, senha: String) : UsuarioEntity? {
+        var usuarioEntity: UsuarioEntity? = null
         try {
-
             val cursor: Cursor
             val db = mPersonalTasksDataBaseHelper.readableDatabase
 
@@ -46,12 +47,25 @@ class UsuarioRepository private constructor(context: Context){
 
             //query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy)
             cursor = db.query(DataBaseConstants.USUARIO.TABLE_NAME,projecao,selecao,selecaoArgumentos,null,null,null)
+            if (cursor.count > 0){
+                //cursor vai para primeira linha
+                cursor.moveToFirst()
+                //pegar dados do cursos
+                val userId = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.USUARIO.COLUMNS.ID))
+                val nome = cursor.getString(cursor.getColumnIndex(DataBaseConstants.USUARIO.COLUMNS.NOME))
+                val email = cursor.getString(cursor.getColumnIndex(DataBaseConstants.USUARIO.COLUMNS.EMAIL))
+
+                //preenche a entidade usuário
+                usuarioEntity = UsuarioEntity(userId, nome, email)
+
+            }
+
             cursor.close()
-
         } catch (e: Exception){
-            throw e
-
+            return usuarioEntity
         }
+
+        return usuarioEntity
 
     }
 

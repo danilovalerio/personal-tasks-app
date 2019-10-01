@@ -3,6 +3,7 @@ package com.example.personaltasks.business
 import android.content.Context
 import com.example.personaltasks.R
 import com.example.personaltasks.constants.PersonalTasksConstants
+import com.example.personaltasks.entities.UsuarioEntity
 import com.example.personaltasks.repository.UsuarioRepository
 import com.example.personaltasks.util.SecurityPreferences
 import com.example.personaltasks.util.ValidationException
@@ -16,6 +17,15 @@ class UsuarioBusiness (val context: Context) {
     //instancia a usuario repository e executa a função insert
     private val mUsuarioRepository : UsuarioRepository = UsuarioRepository.getInstance(context)
     private val mSecurityPreferences: SecurityPreferences = SecurityPreferences(context)
+
+    fun login(email: String, senha: String){
+        val user: UsuarioEntity? = mUsuarioRepository.get(email, senha)
+        if(user != null){
+            mSecurityPreferences.storeSrings(PersonalTasksConstants.KEY.USER_ID, user.id.toString())
+            mSecurityPreferences.storeSrings(PersonalTasksConstants.KEY.USER_NOME, user.nome)
+            mSecurityPreferences.storeSrings(PersonalTasksConstants.KEY.USER_EMAIL, user.email)
+        }
+    }
 
     fun insert(nome: String, email: String, senha: String){
 
