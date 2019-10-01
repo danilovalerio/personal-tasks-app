@@ -22,4 +22,7 @@
     <string name="btn_cadastrar">Cadastrar</string>
     <string name="erro_generico">Algo de errado aconteceu, tente novamente!</string>
     <string name="erro_email_existente">E-mail já cadastrado!</string>
+
+    <!--  Login Activity  -->
+    <string name="entrar">Entrar</string>
 </resources>
