@@ -2,7 +2,9 @@ package com.example.personaltasks.business
 
 import android.content.Context
 import com.example.personaltasks.R
+import com.example.personaltasks.constants.PersonalTasksConstants
 import com.example.personaltasks.repository.UsuarioRepository
+import com.example.personaltasks.util.SecurityPreferences
 import com.example.personaltasks.util.ValidationException
 import java.lang.Exception
 
@@ -12,7 +14,8 @@ import java.lang.Exception
 
 class UsuarioBusiness (val context: Context) {
     //instancia a usuario repository e executa a função insert
-    val mUsuarioRepository : UsuarioRepository = UsuarioRepository.getInstance(context)
+    private val mUsuarioRepository : UsuarioRepository = UsuarioRepository.getInstance(context)
+    private val mSecurityPreferences: SecurityPreferences = SecurityPreferences(context)
 
     fun insert(nome: String, email: String, senha: String){
 
@@ -26,6 +29,13 @@ class UsuarioBusiness (val context: Context) {
            }
 
            val userId = mUsuarioRepository.insert(nome, email, senha)
+
+           //salvar dados do usuário no shared preferences
+           mSecurityPreferences.storeSrings(PersonalTasksConstants.KEY.USER_ID, userId.toString())
+           mSecurityPreferences.storeSrings(PersonalTasksConstants.KEY.USER_NOME, nome)
+           mSecurityPreferences.storeSrings(PersonalTasksConstants.KEY.USER_EMAIL, email)
+
+
 
        } catch (e: Exception){
            throw e
