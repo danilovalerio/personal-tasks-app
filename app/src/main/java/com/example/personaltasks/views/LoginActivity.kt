@@ -1,5 +1,6 @@
 package com.example.personaltasks.views
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -41,6 +42,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         if(mUsuarioBusiness.login(email, senha)) {
             toastLong("Login efetuado com sucesso!")
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         } else {
            toastShort(getString(R.string.usuario_senha_incorretos))
         }

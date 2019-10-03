@@ -1,5 +1,6 @@
 package com.example.personaltasks.views
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -49,6 +50,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
             //Faz a inserção do usuário (ainda sem validações)
             mUsuarioBusiness.insert(nome, email, senha)
+
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
 
         } catch (e: ValidationException){
 
