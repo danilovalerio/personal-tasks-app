@@ -26,24 +26,19 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View) {
-
         when(view.id){
             R.id.btnSalvar -> {
                 salvarUsuario()
             }
         }
-
     }
 
     private fun setListeners(){
         btnSalvar.setOnClickListener(this)
-
     }
 
     private fun salvarUsuario(){
-
         try {
-
             val nome = et_nome.text.toString()
             val email = et_email.text.toString()
             val senha = et_senha.text.toString()
@@ -53,11 +48,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
             startActivity(Intent(this, MainActivity::class.java))
             finish()
-
         } catch (e: ValidationException){
-
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
-
         } catch (e: Exception){
             Toast.makeText(this, getString(R.string.erro_generico), Toast.LENGTH_SHORT).show()
         }
