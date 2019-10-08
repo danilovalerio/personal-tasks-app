@@ -15,4 +15,26 @@ class DataBaseConstants {
             val SENHA = "senha"
         }
     }
+
+    object PRIORIDADE {
+        val TABLE_NAME = "prioridade"
+
+        object COLUMNS {
+            val ID = "id"
+            val DESCRICAO = "descricao"
+        }
+    }
+
+    object TAREFA {
+        val TABLE_NAME = "tarefa"
+
+        object COLUMNS {
+            val ID = "id"
+            val USUARIOID = "usuarioid"
+            val PRIORIDADEID = "prioridadeid"
+            val DESCRICAO = "descricao"
+            val DATAFIM= "datafim"
+            val COMPLETA = "completa"
+        }
+    }
 }

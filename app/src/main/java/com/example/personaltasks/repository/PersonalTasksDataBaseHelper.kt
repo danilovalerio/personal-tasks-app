@@ -20,19 +20,41 @@ class PersonalTasksDataBaseHelper (context: Context) : SQLiteOpenHelper(context,
         ${DataBaseConstants.USUARIO.COLUMNS.SENHA} TEXT       
     );"""
 
+    private val criarTabelaPrioridade = """ CREATE TABLE ${DataBaseConstants.PRIORIDADE.TABLE_NAME}(
+        ${DataBaseConstants.PRIORIDADE.COLUMNS.ID} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${DataBaseConstants.PRIORIDADE.COLUMNS.DESCRICAO} TEXT
+    );"""
+
+    private val criarTabelaTarefa = """ CREATE TABLE ${DataBaseConstants.TAREFA.TABLE_NAME}(
+        ${DataBaseConstants.TAREFA.COLUMNS.ID} INTEGER PRIMARY KEY AUTOINCREMENT,
+        ${DataBaseConstants.TAREFA.COLUMNS.USUARIOID} INTEGER,
+        ${DataBaseConstants.TAREFA.COLUMNS.PRIORIDADEID} INTEGER,
+        ${DataBaseConstants.TAREFA.COLUMNS.DESCRICAO} TEXT,       
+        ${DataBaseConstants.TAREFA.COLUMNS.DATAFIM} TEXT,       
+        ${DataBaseConstants.TAREFA.COLUMNS.COMPLETA} INTEGER       
+    );"""
+
+    //Scripts para deleção das tabelas
     private val deletarTabelaUsuario = "drop table if exists ${DataBaseConstants.USUARIO.TABLE_NAME}"
+    private val deletarTabelaPrioridade = "drop table if exists ${DataBaseConstants.PRIORIDADE.TABLE_NAME}"
+    private val deletarTabelaTarefa = "drop table if exists ${DataBaseConstants.PRIORIDADE.TABLE_NAME}"
 
     //Só executa quando o app é instalado
     override fun onCreate(sqLite: SQLiteDatabase) {
         sqLite.execSQL(criarTabelaUsuario)
-
+        sqLite.execSQL(criarTabelaPrioridade)
+        sqLite.execSQL(criarTabelaTarefa)
     }
 
     override fun onUpgrade(sqLite: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         //remoção
         sqLite.execSQL(deletarTabelaUsuario)
+        sqLite.execSQL(deletarTabelaPrioridade)
+        sqLite.execSQL(deletarTabelaTarefa)
+
         //criacao
         sqLite.execSQL(criarTabelaUsuario)
+        sqLite.execSQL(criarTabelaPrioridade)
+        sqLite.execSQL(criarTabelaTarefa)
     }
-
 }
