@@ -34,6 +34,10 @@ class PersonalTasksDataBaseHelper (context: Context) : SQLiteOpenHelper(context,
         ${DataBaseConstants.TAREFA.COLUMNS.COMPLETA} INTEGER       
     );"""
 
+    //Script para dar carga das prioridades padrões
+    private val inserirPrioridades = """INSERT INTO ${DataBaseConstants.PRIORIDADE.TABLE_NAME}
+        VALUES (1, 'Baixa'), (2, 'Media'), (3, 'Alta'), (4,'Crítica')"""
+
     //Scripts para deleção das tabelas
     private val deletarTabelaUsuario = "drop table if exists ${DataBaseConstants.USUARIO.TABLE_NAME}"
     private val deletarTabelaPrioridade = "drop table if exists ${DataBaseConstants.PRIORIDADE.TABLE_NAME}"
@@ -44,6 +48,7 @@ class PersonalTasksDataBaseHelper (context: Context) : SQLiteOpenHelper(context,
         sqLite.execSQL(criarTabelaUsuario)
         sqLite.execSQL(criarTabelaPrioridade)
         sqLite.execSQL(criarTabelaTarefa)
+        sqLite.execSQL(inserirPrioridades)
     }
 
     override fun onUpgrade(sqLite: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
