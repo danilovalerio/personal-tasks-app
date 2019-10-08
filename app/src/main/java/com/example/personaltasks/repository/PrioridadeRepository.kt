@@ -21,7 +21,7 @@ class PrioridadeRepository private constructor(context: Context){
         private var INSTANCE: PrioridadeRepository? = null
     }
 
-    //Lita de tarefas
+    //Lita de prioridades disponíveis
     fun getList(): MutableList<PrioridadeEntity>{
         val lista = mutableListOf<PrioridadeEntity>()
         try {
