@@ -1,10 +1,10 @@
-package com.example.personaltasks.ui.home
+package com.example.personaltasks.ui.tasklist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class HomeViewModel : ViewModel() {
+class TaskListViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"

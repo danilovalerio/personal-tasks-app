@@ -43,11 +43,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
-
-
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,
+                R.id.nav_task_list,
                 R.id.nav_gallery,
                 R.id.nav_sair
             ), drawerLayout
@@ -62,6 +60,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
+    //Infla o menu de settings da action bar (lado sup direito)
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
@@ -90,6 +89,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_sair -> {
                 Toast.makeText(this, "Item clicado" + item.itemId, Toast.LENGTH_SHORT).show()
                 fazerLogout()
+            }
+            R.id.nav_gallery -> {
+
             }
         }
 
